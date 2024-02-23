@@ -1,0 +1,83 @@
+<!--
+/**
+ * MageINIC
+ * Copyright (C) 2023 MageINIC <support@mageinic.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category MageINIC
+ * @package MageINIC_AIContentGenerator
+ * @copyright Copyright (c) 2023 MageINIC (https://www.mageinic.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MageINIC <support@mageinic.com>
+ */
+-->
+
+<div class="admin__control-wysiwig" style="display: flex">
+    <div id="buttonspagebuilder_html_form_html" class="buttons-set">
+        <button type="button"
+                class="scalable action-add-widget plugin"
+                click="clickInsertWidget">
+            <span>
+                <span>
+                    <span translate="'Insert Widget...'"></span>
+                </span>
+            </span>
+        </button>
+        <button type="button"
+                class="scalable action-add-image plugin"
+                click="clickInsertImage">
+            <span>
+                <span>
+                    <span translate="'Insert Image...'"></span>
+                </span>
+            </span>
+        </button>
+        <button type="button"
+                class="scalable add-variable plugin"
+                click="clickInsertVariable">
+            <span>
+                <span>
+                    <span translate="'Insert Variable...'"></span>
+                </span>
+            </span>
+        </button>
+    </div>
+    <div data-bind="visible: displayPageEnabled()">
+        <button type="button"
+                class="scalable primary ai-generate plugin"
+                click="clickGenerateAIData"
+                data-bind="visible: moduleIsEnabled()">
+            <span>
+                <span>
+                    <span translate="'Generate AI Data'"></span>
+                </span>
+            </span>
+        </button>
+    </div>
+</div>
+<textarea class="admin__control-textarea" data-bind="
+    value: value,
+    valueUpdate: valueUpdate,
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        cols: cols,
+        rows: rows,
+        'aria-describedby': noticeId,
+        placeholder: placeholder,
+        id: uid,
+        disabled: disabled
+    }"
+></textarea>

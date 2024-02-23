@@ -1,0 +1,28 @@
+{
+    "name": "mageinic/ai-content-generator",
+    "description": "Introducing Magento 2 AI Content Generator the ultimate extension for streamlining your content creation process. With its advanced artificial intelligence capabilities, this extension revolutionizes the way you generate product descriptions and optimize your website's metadata.",
+    "require": {
+        "php": ">=8.0.0",
+        "mageinic\/core": ">=1.0.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "Commercial"
+    ],
+    "authors": [
+        {
+            "name": "MageINIC",
+            "email": "support@mageinic.com",
+            "homepage": "https://www.mageinic.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageINIC\\AIContentGenerator\\": ""
+        }
+    }
+}

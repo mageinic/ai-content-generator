@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageINIC
+ * Copyright (C) 2023 MageINIC <support@mageinic.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category MageINIC
+ * @package MageINIC_AIContentGenerator
+ * @copyright Copyright (c) 2023 MageINIC (https://www.mageinic.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MageINIC <support@mageinic.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="content_generator" translate="label" sortOrder="20"
+                 showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>AI Content Generator</label>
+            <tab>mageinic</tab>
+            <resource>MageINIC_AIContentGenerator::content_generator_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enabled" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>AI Content Generator</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="import_field" translate="label comment" type="multiselect" sortOrder="40"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bulk Generation fields</label>
+                    <source_model>MageINIC\AIContentGenerator\Model\Config\Options</source_model>
+                    <validate>validate-select</validate>
+                    <comment><![CDATA[Select fields to generate AI content in bulk.]]></comment>
+                </field>
+                <field id="notification_template" translate="label comment" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bulk Import Notification Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="send_to" translate="label comment" type="text" sortOrder="60"
+                       showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>Send Bulk Import Notification To</label>
+                    <comment><![CDATA[Comma-separated.]]></comment>
+                </field>
+            </group>
+            <group id="api" translate="label" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>API Configuration</label>
+                <field id="end_point_url" translate="label" type="text" sortOrder="10"
+                       showInDefault="1" showInStore="0" showInWebsite="0" canRestore="1">
+                    <label>End Point URL</label>
+                </field>
+                <field id="token" translate="label comment" type="obscure" sortOrder="20"
+                       showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>OpenAI Key</label>
+                    <validate>required-entry</validate>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <tooltip>
+                        <![CDATA[
+                        <b>1:</b> Login or Signup to OpenAI Account using
+                        <a href="https://platform.openai.com" target="blank">platform.openai.com</a> URL.
+                        <br/><br/>
+                        <b>2:</b> Click on your profile logo from the upper-right corner and select
+                        <b>View API keys</b>.
+                        <br/><br/>
+                        <b>3:</b> Now click on Create new secret key button.
+                        <br/><br/>
+                        <b>4:</b> The API secret key is generated successfully.
+                        You can copy and add to the extension configuration.
+                        ]]>
+                    </tooltip>
+                </field>
+                <field id="validate_key" translate="label" sortOrder="30"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <button_label>Validate OpenAI Key</button_label>
+                    <button_url>content_generator/generate/validate</button_url>
+                    <frontend_model>MageINIC\AIContentGenerator\Block\Adminhtml\System\Config\Button</frontend_model>
+                </field>
+                <field id="openai_model" translate="label" type="text" sortOrder="40"
+                       showInDefault="1" showInStore="0" showInWebsite="0" canRestore="1">
+                    <label>OpenAI model name</label>
+                    <tooltip>
+                        <![CDATA[Write OpenAI model name. Ex. GPT-3, GPT-4, etc.]]>
+                    </tooltip>
+                </field>
+                <field id="temperature" type="hidden" translate="label comment" sortOrder="50"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Temperature</label>
+                    <frontend_model>MageINIC\AIContentGenerator\Block\Adminhtml\System\Config\Temperature</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <tooltip>
+                        <![CDATA[
+                        In OpenAI's GPT-3 language model,
+                        `<b>temperature</b>` is a parameter that controls the creativity
+                        or randomness of the generated text.
+                         Specifically, it controls the level of randomness in the choice
+                         of the next word in the generated text.
+                        <br/><br/>
+                        A low temperature value (e.g., 0.1) will generate text that is very predictable
+                        and conservative, with the most probable next word being chosen.
+                        On the other hand, a high temperature value (e.g., 1.0) will generate text that is more creative
+                         and unpredictable, with less probable next words being chosen.
+                        <br/><br/>
+                        In general, higher temperature values can result in more interesting and creative output,
+                        but may also produce more errors or irrelevant responses. Lower temperature values,
+                        on the other hand, can produce more accurate and relevant responses,
+                        but may be more repetitive or predictable.
+                        ]]>
+                    </tooltip>
+                </field>
+                <field id="top_p" type="select" translate="label" sortOrder="60"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Top P</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>
+                        <![CDATA[
+                        In OpenAI's GPT-3 model,
+                        the `<b>top_p</b>` parameter is used to sample the probability distribution
+                        of the next token based on the likelihood of the most probable tokens.
+                        The `<b>top_p</b>` parameter is a float value between 0 and 1,
+                         where 0 means the model always selects the most probable token,
+                          and 1 means the model selects from the entire distribution of probabilities.
+                        <br/><br/>
+                        The `<b>top_p</b>` parameter does not have a predefined range of minimum and maximum values.
+                        However, it is recommended to keep the value between 0.1 and 0.9 for better results.
+                        A lower value will lead to more conservative and predictable responses,
+                         while a higher value will result in more creative and unexpected responses.
+                         The appropriate value for `<b>top_p</b>` depends on the specific use case
+                          and the desired level of creativity and unpredictability.
+                        ]]>
+                    </tooltip>
+                </field>
+                <field id="frequency_penalty" type="select" translate="label comment" sortOrder="70"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Frequency Penalty</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>
+                        <![CDATA[
+                        `<b>frequency_penalty</b>` is a parameter in OpenAI's API that controls the degree
+                        to which the model is allowed to repeat similar tokens or phrases within its response.
+                        It is used to prevent the model from generating repetitive output
+                         and encourage it to generate more diverse and original responses.
+                        <br/><br/>
+                        A value of 0.0 means that the model has no penalty for repeating tokens,
+                        while a value of 1.0 means that it will avoid repeating any tokens. The default value is 0.0.
+                        <br/><br/>
+                        For example, if the model generates a sentence with the word "apple" in it
+                         and `<b>frequency_penalty</b>` is set to 0.5,
+                          the model will be less likely to generate another sentence with the word "apple" in it.
+                         This can help to make the generated output more diverse and interesting.
+                        ]]>
+                    </tooltip>
+                </field>
+                <field id="presence_penalty" type="select" translate="label comment" sortOrder="80"
+                       showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Presence Penalty</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <tooltip>
+                        <![CDATA[
+                        The `<b>presence_penalty</b>` parameter in the OpenAI API specifies the penalty to
+                        be applied to tokens that occur in the context.
+                        When generating text using the API,
+                         the model can take into account the previous text that has been generated
+                          and use it to generate more coherent and relevant text.
+                        The `<b>presence_penalty</b>` parameter allows you to control the likelihood of the generated
+                        text repeating phrases that have already occurred in the context.
+                        A higher value will make the model less likely to repeat previously used phrases.
+                        On the other hand,
+                         a lower value will make the model more likely to repeat previously used phrases.
+                        The valid range for this parameter is 0 to 1.0,
+                         with 0 meaning no penalty and 1 meaning a maximum penalty.
+                        ]]>
+                    </tooltip>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

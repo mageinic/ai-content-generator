@@ -1,0 +1,55 @@
+/**
+ * MageINIC
+ * Copyright (C) 2023 MageINIC <support@mageinic.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category MageINIC
+ * @package MageINIC_AIContentGenerator
+ * @copyright Copyright (c) 2023 MageINIC (https://www.mageinic.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MageINIC <support@mageinic.com>
+ */
+
+.content-generator-modal .modal-inner-wrap{ max-width: 500px; }
+.content-generator-modal .need-prompt-submit,
+.content-generator-modal .need-prompt-yes{ display: none; background-color: #eb5202 !important;
+    border-color: #eb5202 !important; color: #ffffff !important; text-decoration: none; }
+.content-generator-modal .need-prompt-submit:active,
+.content-generator-modal .need-prompt-submit:hover,
+.content-generator-modal .need-prompt-yes:active,
+.content-generator-modal .need-prompt-yes:hover{ text-decoration: none !important; }
+.content-generator-modal .modal-header{ margin-bottom: 20px; }
+.content-generator-modal .modal-title{ display: none; }
+.content-generator-modal .need-prompt-back{ display: none; }
+.content-generator-modal .custom-prompt-text input{ width: 100%; padding: 10px; border: 1px solid #ccc;
+    box-shadow: none; }
+.content-generator-modal .custom-prompt-text .error-message{ color: #e02b27; font-size: 1.2rem; margin-top: 5px; }
+.catalog-product-edit [data-index="short_description"],
+.catalog-product-new [data-index="short_description"] { display: inline-block !important; width: 100%; }
+[class*='admin__control-grouped'] > .admin__field > .admin__field-control .admin__field-label { line-height: 0; }
+.catalog-product-edit [data-index="ai-button-short_description"],
+.catalog-product-new [data-index="ai-button-short_description"] { float: left; width: 100% !important; clear: both;
+    display: inline-block !important; padding: 0 !important; }
+.admin__fieldset-page-builder .content_generator_button { display: none; }
+.content-generator-modal .need-prompt p{ margin-bottom: 20px; }
+.content-generator-modal .custom-prompt-text textarea { padding: 10px; width: 100%; }
+.content-generator-modal .action-close:focus{ padding: 2.1rem 2.6rem !important; }
+.catalog-category-edit .content_generator_button .admin__field-label,
+.catalog-category-add .content_generator_button .admin__field-label{ display: none }
+.catalog-category-edit .content_generator_button .admin__field-control,
+.catalog-category-add .content_generator_button .admin__field-control{ margin-top: 10px; }
+.content-generator-modal.modal-slide._inner-scroll .modal-footer{ padding-top: 0; }
+.catalog-product-new .admin__fieldset > .admin__field,
+.catalog-product-edit .admin__fieldset > .admin__field{ margin-bottom: 0; }

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageINIC
+ * Copyright (C) 2023 MageINIC <support@mageinic.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category MageINIC
+ * @package MageINIC_AIContentGenerator
+ * @copyright Copyright (c) 2023 MageINIC (https://www.mageinic.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MageINIC <support@mageinic.com>
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageINIC\AIContentGenerator\Model\CompletionConfig">
+        <arguments>
+            <argument name="pool" xsi:type="array">
+                <item name="0" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionRequest\MetaDescription</item>
+                <item name="1" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionRequest\MetaKeywords</item>
+                <item name="2" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionRequest\MetaTitle</item>
+                <item name="3" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionRequest\ShortDescription</item>
+                <item name="4" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionRequest\Description</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\ImportExport\Model\Import\SampleFileProvider">
+        <arguments>
+            <argument name="samples" xsi:type="array">
+                <item name="ai_content_import" xsi:type="string">MageINIC_AIContentGenerator</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="MageINIC\AIContentGenerator\Api\Data\ContentGeneratorInterface"
+                type="MageINIC\AIContentGenerator\Model\Consumer"/>
+    <type name="Magento\ImportExport\Model\Import">
+        <plugin name="skipFileUpload" type="MageINIC\AIContentGenerator\Plugin\SkipFileUpload"/>
+    </type>
+</config>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * MageINIC
+ * Copyright (C) 2023 MageINIC <support@mageinic.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category MageINIC
+ * @package MageINIC_AIContentGenerator
+ * @copyright Copyright (c) 2023 MageINIC (https://www.mageinic.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author MageINIC <support@mageinic.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="search_engine_optimization">
+        <field name="meta_title">
+            <argument name="data" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </argument>
+        </field>
+        <field name="meta_keywords">
+            <argument name="data" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </argument>
+        </field>
+        <field name="meta_description">
+            <argument name="data" xsi:type="array">
+                <item name="disabled" xsi:type="boolean">true</item>
+            </argument>
+        </field>
+        <container name="seo_group_title"
+                   component="Magento_Ui/js/form/components/group" sortOrder="130">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="meta_title" sortOrder="140" formElement="input">
+                <settings>
+                    <dataType>string</dataType>
+                    <label translate="true">Meta Title</label>
+                </settings>
+            </field>
+        </container>
+        <container name="seo_group_keywords"
+                   component="Magento_Ui/js/form/components/group" sortOrder="140">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="meta_keywords" sortOrder="150" formElement="textarea">
+                <settings>
+                    <dataType>string</dataType>
+                    <label translate="true">Meta Keywords</label>
+                </settings>
+            </field>
+        </container>
+        <container name="seo_group_description"
+                   component="Magento_Ui/js/form/components/group" sortOrder="160">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="meta_description" sortOrder="170" formElement="textarea">
+                <settings>
+                    <dataType>string</dataType>
+                    <label translate="true">Meta Description</label>
+                </settings>
+            </field>
+        </container>
+    </fieldset>
+    <component component="MageINIC_AIContentGenerator/js/content_generator"
+               name="ai.content.generator" class="MageINIC\AIContentGenerator\Ui\Generator">
+        <argument name="data" xsi:type="array">
+            <item name="completion_config" xsi:type="object">MageINIC\AIContentGenerator\Model\CompletionConfig</item>
+        </argument>
+    </component>
+</form>
